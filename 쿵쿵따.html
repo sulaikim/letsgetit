@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+<div><span id="order">1</span>번째 참가자</div>
+<div>제시어 : <span id="word"></span> </div> 
+<input type="text"> 
+<button>입력</button>
+
+
+  <script>
+    const number = Number(prompt('몇명이 참가하나요?'));
+// number값이 있을경우만 코드실행 (prompt에서 취소버튼 누르면 실행 안됨)
+    if(number){
+      const $input = document.querySelector('input');
+      const $order = document.querySelector('#order');
+      const $button = document.querySelector('button');
+      const $word = document.querySelector('#word')
+      let word;
+      let newWord;
+      
+      const onClickButton = () => {
+        if(newWord.length === 3 && (!word || word[word.length-1] === newWord[0])){            
+          word = newWord;
+          $word.textContent = word;
+          const order = Number($order.textContent);
+          if(order+1 > number){
+            $order.textContent = 1;
+          }else{
+            $order.textContent = order+1;
+          }
+        }else{
+         alert('올바른 단어가 아닙니다.')
+        }
+        $input.value = '';
+        $input.focus();
+      };  
+      
+      const onInput = (event) => {
+      newWord = event.target.value;
+    }; 
+
+      $input.addEventListener('input',onInput)
+      $button.addEventListener('click',onClickButton)
+  }
+  </script>
+</body>
+</html>

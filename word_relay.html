@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>끝말잇기</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어 : <span id="word"></span></div>
+  <input type="text">  
+  <button>입력</button>
+  <!-- <button class="btn">버튼2</button>
+  <button class="btn target">버튼3</button> -->
+
+  <script>
+   const number = parseInt(prompt('몇 명이 참가하나요?')) //숫자로 변환해주기
+   const $button = document.querySelector('button');
+   const $input = document.querySelector('input');
+   const $word = document.querySelector('#word');
+   const $order = document.querySelector('#order');
+   let word; //제시어
+   let newWord; //새로 입력한 단어 
+   $input.focus();
+
+   const onClickButton = () =>{
+    if(!word|| word[word.length-1]===newWord[0]){//제시어가 비어있거나 끝자리와 첫자리가 같으면
+      word = newWord; //입력한 단어가 제시어가 된다
+      $word.textContent = word; 
+      const order = Number($order.textContent)//현재순서
+      if(order +1 > number){
+        $order.textContent = 1
+      }else{
+        $order.textContent = order+1
+      }
+    }else{//올바르지 않은가
+        alert('올바르지 않은 단어입니다.')
+      }
+      $input.value ='';
+        $input.focus();
+     };
+    const onInput = () =>{
+    newWord = event.target.value; //입력될때마다 저장시키기 (검증)
+   };
+
+   $button.addEventListener('click',onClickButton);
+   $input.addEventListener('input',onInput);
+
+  //  alert(number);
+  //  const yesOrNo = confirm('맞나요?')
+
+  //  document.querySelector('#order')
+  //  document.querySelector('div span') //div의 자손인span(공백주의)
+  //  document.querySelectorAll('.target') //클래스가 target인 모두 
+
+  //  document.querySelector('input').addEventListener('input',(event)=>{
+  //   console.log('글자입력',event.target.value)
+  //  });
+  //  document.querySelector('button').addEventListener('click',function(){
+  //   console.log('버튼 클릭')
+  //  });
+
+
+   
+  </script>
+</body>
+</html>
